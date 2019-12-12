@@ -36,3 +36,11 @@
           asyncParseSFZ = new AsyncParseSFZ(getMainLooper(), MainActivity.this);
         //2.第二步：设置读卡监听回调接口,
           asyncParseSFZ.setOnReadSFZListener(new AsyncParseSFZ.OnReadSFZListener() {
+             }
+        //3.第三步 在onResume和onDestory两个方法中分别开启和关闭串口
+
+连续读取
+
+        在单独读取的基础上，新增一个handle，通过发布定时任务task，在每次感应成功后再次触发感应
+
+综上 ： 详情查看代码
