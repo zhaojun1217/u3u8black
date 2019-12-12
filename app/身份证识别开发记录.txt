@@ -1,0 +1,38 @@
+1.新建项目 绘制布局 监听事件
+
+2。配置gradle 身份证的目标版本必须是22，其他无所谓
+
+   在android{}的外面
+   配置 repositories {
+     flatDir {
+         dirs 'libs'   // aar目录
+     }
+       }
+
+   把两个aar包拷贝到libs里，注意名字要对应上
+   dependencies {
+        ...
+       //串口开发包
+       //SerialPort SDK
+       compile(name: 'serialport_sdk_20190429', ext: 'aar')
+
+       //身份证开发包,需要依赖串口开发包
+       //IDcard SDK,need SerialPort SDK
+       compile(name: 'idcard_sdk_20190429', ext: 'aar')
+    }
+
+   manifest里面要加上权限
+   <!--身份证权限-->
+   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+3。开发过程中出现问题，u3u8两个机器如上配置后asyncParseSFZ初始化的时候，提示缺少so包UnsatisfiedLinkError: dalvik.system.PathClassLoader
+   好在发现该so包在jff项目中有，所以在gradle中加入了so包支持，并拷贝了armeabi-v7a的包和里面的so文件，错误解决
+
+4。项目初始化
+
+单独读取：
+
+        //1.第一步：实例化
+          asyncParseSFZ = new AsyncParseSFZ(getMainLooper(), MainActivity.this);
+        //2.第二步：设置读卡监听回调接口,
+          asyncParseSFZ.setOnReadSFZListener(new AsyncParseSFZ.OnReadSFZListener() {
