@@ -12,13 +12,13 @@
    把两个aar包拷贝到libs里，注意名字要对应上
    dependencies {
         ...
-       //串口开发包
-       //SerialPort SDK
-       compile(name: 'serialport_sdk_20190429', ext: 'aar')
+          //串口开发包
+          //SerialPort SDK
+          implementation(name: 'serialport_sdk_20190712', ext: 'aar')
 
-       //身份证开发包,需要依赖串口开发包
-       //IDcard SDK,need SerialPort SDK
-       compile(name: 'idcard_sdk_20190429', ext: 'aar')
+          //身份证开发包,需要依赖串口开发包
+          //IDcard SDK,need SerialPort SDK
+          implementation(name: 'idcard_sdk_20190617', ext: 'aar')
     }
 
    manifest里面要加上权限
@@ -27,6 +27,8 @@
 
 3。开发过程中出现问题，u3u8两个机器如上配置后asyncParseSFZ初始化的时候，提示缺少so包UnsatisfiedLinkError: dalvik.system.PathClassLoader
    好在发现该so包在jff项目中有，所以在gradle中加入了so包支持，并拷贝了armeabi-v7a的包和里面的so文件，错误解决
+
+   更新此处解决问题的方法，在导入一个新项目的时候，发现即使如上解决，还是会报错，后来的解决方法是 armeabi-v7a 只留了这个so库架构，删除了报错的so包 感觉像是缓存的问题
 
 4。项目初始化
 

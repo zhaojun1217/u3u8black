@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         tvBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                asyncParseSFZ.readSFZ(ParseSFZAPI.THIRD_GENERATION_CARD);
+//                asyncParseSFZ.readSFZ(ParseSFZAPI.THIRD_GENERATION_CARD);
+                asyncParseSFZ.readSFZ();
             }
         });
         cbOpen.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
